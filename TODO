@@ -1,0 +1,8 @@
+changer name en UUID
+
+coder la fonction qui check si on a deja envoyer un bundle
+
+check si il ya des des one time pre key ?
+    - demander le renvois de one time pre key si yen a plus 
+
+delete one time pre key si envoyer  
