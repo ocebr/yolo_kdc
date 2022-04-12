@@ -1,6 +1,6 @@
 use serde::*;
 
-#[derive(Debug,Deserialize,Serialize,sqlx::FromRow)]
+#[derive(Debug,Deserialize,Serialize,sqlx::FromRow,Clone)]
 pub struct Identity {
     pub name_ : String,
     #[serde(with = "serde_bytes")]
@@ -11,6 +11,9 @@ pub struct Identity {
     pub signature : Vec<u8>,
     #[serde(with = "serde_bytes")]
     pub one_time_pre_key : Vec<u8>,
+    #[serde(with = "serde_bytes")]
+    pub ephemeral_key : Vec<u8>,
+
 }
 
 #[derive(Debug,Deserialize,Serialize,sqlx::FromRow)]
@@ -20,7 +23,7 @@ pub struct NameOf {
 }
 
 
-#[derive(Debug,Deserialize,Serialize,sqlx::FromRow)]
+#[derive(Debug,Deserialize,Serialize,sqlx::FromRow,Clone)]
 pub struct IdentityStringify {
     pub name_ : String,
     pub identity_key : String,
@@ -29,7 +32,10 @@ pub struct IdentityStringify {
   
     pub signature_ : String,
 
-    pub one_time_pre_key : String
+    pub one_time_pre_key : String,
+
+    pub ephemeral_key : String
+
 }
 
 

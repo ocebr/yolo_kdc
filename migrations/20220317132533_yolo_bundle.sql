@@ -6,5 +6,6 @@ create table yolo_bundle (
     identity_key varchar not null,
     signed_pre_key varchar not null,
     signature_ varchar not null,
-    one_time_pre_key varchar not null
+    one_time_pre_key varchar not null,
+    ephemeral_key varchar not null
 );
