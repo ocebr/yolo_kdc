@@ -56,7 +56,7 @@ async fn get_bundle_of(repository : UserRepository , req : HttpRequest, info : J
   
     let bundle_to_return = repository.get_stored_bundle_of(info.name_.clone()).await;
 
-    HttpResponse::Ok().json(bundle_to_return.unwrap())
+    HttpResponse::Ok().header("Access-Control-Request-Methods","*").header("Access-Control-Allow-Origin","*").json(bundle_to_return.unwrap())
 }
 
 #[derive(Deserialize)]
