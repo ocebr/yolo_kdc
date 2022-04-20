@@ -26,8 +26,8 @@ pub struct Bundle {
 
 async fn stock_bundle(repository: UserRepository,req: HttpRequest,info : web::Json<Identity>) -> impl Responder{
     
-    println!("{:?}", req);
-    println!("allo ff");
+    //println!("{:?}", req);
+    println!("dans stock bundle");
     println!("{:?}", info);
 
     let bundle = Identity {
@@ -47,7 +47,7 @@ async fn stock_bundle(repository: UserRepository,req: HttpRequest,info : web::Js
     }
     //let store_bundle = repository.store_bundle(bundle).await;
     
-    HttpResponse::Ok().header("Access-Control-Request-Methods","*").header("Access-Control-Allow-Origin","*").body("ok")
+    HttpResponse::Ok()//.header("Access-Control-Request-Methods","*").header("Access-Control-Allow-Origin","*").body("ok")
 }
 
 async fn get_bundle_of(repository : UserRepository , req : HttpRequest, info : Json<NameOf>) -> impl Responder{
@@ -56,7 +56,7 @@ async fn get_bundle_of(repository : UserRepository , req : HttpRequest, info : J
   
     let bundle_to_return = repository.get_stored_bundle_of(info.name_.clone()).await;
 
-    HttpResponse::Ok().header("Access-Control-Request-Methods","*").header("Access-Control-Allow-Origin","*").json(bundle_to_return.unwrap())
+    HttpResponse::Ok().json(bundle_to_return.unwrap())
 }
 
 #[derive(Deserialize)]
