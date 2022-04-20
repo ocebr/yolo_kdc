@@ -43,7 +43,7 @@ impl UserRepository {
     pub async fn store_bundle(&self, bundle: Identity, replace_or_not : bool) -> Result<Identity> {
         //println!("{:?}",format!("{:?}",bundle.identity_key));
     if replace_or_not == false {
-        println!("dans le if");
+        //println!("dans le if");
         let bundle1 = sqlx::query_as::<_, Identity>("insert into yolo_bundle (name_ ,identity_key,signed_pre_key,signature_,one_time_pre_key,ephemeral_key) values ($1,$2,$3,$4,$5,$6) returning *")
             .bind(format!("{:?}",bundle.name_))
             .bind(format!("{:?}",bundle.identity_key))
@@ -54,7 +54,7 @@ impl UserRepository {
             .fetch_one(&*self.pool)
             .await?;
 
-            println!("SQL :     {:?}",bundle1);
+            //println!("SQL :     {:?}",bundle1);
             Ok(bundle1)
     }else {
         println!("dans le else");
@@ -74,8 +74,8 @@ impl UserRepository {
     }
     pub async fn get_stored_bundle_of(&self , name_ : String) -> Result<Identity,&str>
     {
-    println!("dans db --> get bundle of ");
-    println!("{:?}",name_.clone());
+    //println!("dans db --> get bundle of ");
+    //println!("{:?}",name_.clone());
         //TODO :
             //  - store un nom dans la db
             // get le bundle du nom
@@ -89,6 +89,7 @@ impl UserRepository {
 
         if bundle_to_return_stringify.is_some(){
             let bundle_to_return_stringify2 = bundle_to_return_stringify.clone().unwrap();
+            println!("{}", bundle_to_return_stringify2.name_);
                     let bundle = Identity {
                         name_ : bundle_to_return_stringify2.name_,
                         identity_key: parse_bundle_arguments(bundle_to_return_stringify2.identity_key),
@@ -97,7 +98,7 @@ impl UserRepository {
                         one_time_pre_key: parse_bundle_arguments(bundle_to_return_stringify2.one_time_pre_key),
                         ephemeral_key : parse_bundle_arguments(bundle_to_return_stringify2.ephemeral_key)
                     };
-                    println!("{:?}", bundle);
+                   // println!("{:?}", bundle);
                     Ok(bundle)
             
         }else{
